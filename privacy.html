@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Ganak Calculators</title>
+<meta name="description" content="Privacy policy for Ganak's free online calculator tools.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="brand-row">
+      <div class="brand-mark">ग</div>
+      <h1>Ganak</h1>
+    </a>
+    <div class="header-controls">
+      <select id="lang-select" onchange="onLangChange()">
+        <option value="en">EN</option>
+        <option value="hi">हिं</option>
+        <option value="mr">मरा</option>
+      </select>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <div class="inner">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+      <a href="terms.html" data-i18n="nav_terms">Terms</a>
+      <a href="privacy.html" class="active" data-i18n="nav_privacy">Privacy Policy</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-hero">
+    <h2>Privacy Policy</h2>
+    <p>Last updated: July 2026</p>
+  </div>
+
+  <div class="content-card">
+    <h3>1. Information We Collect</h3>
+    <p>Ganak's calculators run entirely in your browser — numbers you enter (loan amount, date of birth, income, etc.) are never sent to or stored on our servers. Calculations happen locally on your device.</p>
+
+    <h3>2. Anonymous Site Analytics</h3>
+    <p>We use a basic visitor counter to see how many people use the site each day. This does not identify you personally — it only counts page visits.</p>
+
+    <h3>3. Comments</h3>
+    <p>If you choose to leave a comment, it is handled through GitHub Discussions (Giscus) and requires a GitHub account. That data is governed by GitHub's own privacy policy.</p>
+
+    <h3>4. Cookies</h3>
+    <p>We do not use tracking or advertising cookies beyond what may be required by third-party services (such as the visitor counter or, in future, Google AdSense) shown on this page.</p>
+
+    <h3>5. Third-Party Links</h3>
+    <p>Our site may link to external services (Telegram, WhatsApp, exchange platforms). We are not responsible for the privacy practices of those third-party sites.</p>
+
+    <h3>6. Children's Privacy</h3>
+    <p>Ganak is not directed at children under 13 and we do not knowingly collect data from them.</p>
+
+    <h3>7. Changes to This Policy</h3>
+    <p>We may update this policy from time to time. Changes will be posted on this page.</p>
+
+    <h3>8. Contact</h3>
+    <p>Questions about this policy can be sent via our <a href="contact.html">Contact Us</a> page.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 data-i18n="footer_tools">Tools</h4>
+        <a href="index.html#emi">EMI Calculator</a>
+        <a href="index.html#sip">SIP Calculator</a>
+        <a href="index.html#age">Age Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_legal">Legal</h4>
+        <a href="terms.html" data-i18n="nav_terms">Terms</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ganak. All rights reserved.</span>
+      <span class="visitor-badge"><img src="https://hits.sh/pavankumar-madavi-dev.github.io/ganak-privacy.svg?label=visits" alt="visitor count"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>

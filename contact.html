@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Ganak Calculators</title>
+<meta name="description" content="Contact niDar Marketing And Services, the team behind Ganak calculators, for support, feedback or business enquiries.">
+<link rel="stylesheet" href="style.css">
+<style>
+  input[type=text], input[type=email], textarea{
+    width:100%;padding:10px 12px;font-size:14px;background:var(--paper2);
+    border:1px solid var(--line);border-radius:3px;color:var(--ink);margin-top:6px;margin-bottom:14px;font-family:'Inter';
+  }
+  textarea{min-height:110px;resize:vertical;}
+  label{font-size:12px;color:var(--ink-soft);font-weight:600;}
+  button.send-btn{background:var(--teal);color:#fff;border:none;padding:11px 24px;border-radius:3px;font-weight:700;cursor:pointer;font-size:13.5px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="brand-row">
+      <div class="brand-mark">ग</div>
+      <h1>Ganak</h1>
+    </a>
+    <div class="header-controls">
+      <select id="lang-select" onchange="onLangChange()">
+        <option value="en">EN</option>
+        <option value="hi">हिं</option>
+        <option value="mr">मरा</option>
+      </select>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <div class="inner">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="contact.html" class="active" data-i18n="nav_contact">Contact Us</a>
+      <a href="terms.html" data-i18n="nav_terms">Terms</a>
+      <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-hero">
+    <h2>Contact Us</h2>
+    <p>Questions, feedback, or business enquiries — we'd love to hear from you.</p>
+  </div>
+
+  <div class="content-card">
+    <h3>Reach Us Directly</h3>
+    <p><strong>Business:</strong> niDar Marketing And Services</p>
+    <p><strong>Address:</strong> Sadak Arjuni, Gondia, Maharashtra, India</p>
+    <p><strong>WhatsApp:</strong> +91 89566 81474</p>
+    <p><strong>Telegram:</strong> <a href="https://t.me/GlobalTraderPavan" target="_blank">@GlobalTraderPavan</a></p>
+
+    <h3>Send a Message</h3>
+    <p style="margin-bottom:14px;">This form opens your email app with the message pre-filled — no data is stored on our server.</p>
+    <form onsubmit="sendMail(event)">
+      <label>Your Name</label>
+      <input type="text" id="cf-name" required>
+      <label>Your Email</label>
+      <input type="email" id="cf-email" required>
+      <label>Message</label>
+      <textarea id="cf-msg" required></textarea>
+      <button type="submit" class="send-btn">Send Message</button>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 data-i18n="footer_tools">Tools</h4>
+        <a href="index.html#emi">EMI Calculator</a>
+        <a href="index.html#sip">SIP Calculator</a>
+        <a href="index.html#age">Age Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_legal">Legal</h4>
+        <a href="terms.html" data-i18n="nav_terms">Terms</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ganak. All rights reserved.</span>
+      <span class="visitor-badge"><img src="https://hits.sh/pavankumar-madavi-dev.github.io/ganak-contact.svg?label=visits" alt="visitor count"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+function sendMail(e){
+  e.preventDefault();
+  const name = document.getElementById('cf-name').value;
+  const email = document.getElementById('cf-email').value;
+  const msg = document.getElementById('cf-msg').value;
+  const subject = encodeURIComponent('Message from Ganak website — ' + name);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+  window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>

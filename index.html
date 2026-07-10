@@ -4,25 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ganak — Free Online Calculators for Finance, Age, Building Cost & Math</title>
-<meta name="description" content="Free online calculators: EMI calculator, SIP calculator, building construction cost calculator, age calculator, percentage calculator, scientific calculator and monthly budget planner. Fast, accurate, no sign-up.">
-<meta name="keywords" content="calculator, online calculator, EMI calculator, SIP calculator, age calculator, building construction cost calculator, scientific calculator online, percentage calculator, monthly budget planner, free calculator website">
+<meta name="description" content="Free online calculators: EMI, SIP, building cost, age, budget planner, BMI, calorie, body fat, BMR, ideal weight, pregnancy due date, percentage and scientific calculator. Fast, accurate, no sign-up.">
+<meta name="keywords" content="calculator, online calculator, EMI calculator, SIP calculator, age calculator, building construction cost calculator, BMI calculator, calorie calculator, body fat calculator, BMR calculator, ideal weight calculator, pregnancy due date calculator, scientific calculator online, percentage calculator, monthly budget planner, free calculator website">
 <link rel="stylesheet" href="style.css">
 <style>
   .calc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
   .calc-card h4{font-size:14px;color:var(--teal-dark);margin-bottom:14px;font-weight:700;}
   label{font-size:12px;color:var(--ink-soft);display:block;margin-bottom:5px;margin-top:12px;font-weight:600;}
   label:first-of-type{margin-top:0;}
-  input[type=number],input[type=date],input[type=text]{
+  input[type=number],input[type=date],input[type=text],select.calc-select{
     width:100%;padding:10px 12px;font-size:15px;background:var(--paper2);
     border:1px solid var(--line);border-radius:3px;color:var(--ink);font-family:'IBM Plex Mono';
   }
-  input:focus{outline:none;border-color:var(--teal);}
+  input:focus, select.calc-select:focus{outline:none;border-color:var(--teal);}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .result-strip{margin-top:16px;padding:14px 16px;background:var(--ink);color:var(--paper);border-radius:3px;font-size:13px;}
   .result-strip .label{color:#b7bdae;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
   .result-strip .val{font-family:'IBM Plex Mono';font-size:22px;color:var(--gold);font-weight:600;margin-top:2px;}
-  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;}
-  .result-grid div{background:var(--paper2);border-radius:3px;padding:10px;text-align:center;}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;position:relative;z-index:1;}
+  .result-grid div{background:var(--paper2);border-radius:3px;padding:10px;text-align:center;min-width:0;overflow:hidden;}
+  @media(min-width:760px){
+    main{max-width:900px;}
+    .toc-grid{grid-template-columns:1fr 1fr 1fr 1fr;}
+    .toc-cat:nth-child(2n){border-right:1px solid var(--line);}
+    .toc-cat:nth-child(4n){border-right:none;}
+  }
   .result-grid .n{font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:var(--teal-dark);}
   .result-grid .l{font-size:10px;color:var(--ink-soft);margin-top:3px;}
   .keypad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px;}
@@ -82,7 +88,7 @@
   </div>
 
   <div class="toc">
-    <div class="toc-head"><span>Index</span><span>7 tools</span></div>
+    <div class="toc-head"><span>Index</span><span>13 tools</span></div>
     <div class="toc-grid">
       <div class="toc-cat">
         <h3>Financial</h3>
@@ -102,6 +108,15 @@
       <div class="toc-cat">
         <h3>Scientific</h3>
         <a href="#sci">Scientific Calculator</a>
+      </div>
+      <div class="toc-cat">
+        <h3>Health &amp; Fitness</h3>
+        <a href="#bmi">BMI Calculator</a>
+        <a href="#calorie">Calorie Calculator</a>
+        <a href="#bodyfat">Body Fat Calculator</a>
+        <a href="#bmr">BMR Calculator</a>
+        <a href="#idealweight">Ideal Weight Calculator</a>
+        <a href="#pregnancy">Pregnancy Due Date</a>
       </div>
     </div>
   </div>
@@ -256,6 +271,144 @@
     </div>
   </section>
 
+  <section id="bmi">
+    <div class="sec-label"><div class="stamp">08</div><h2>BMI Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Body Mass Index</h4>
+      <div class="row2">
+        <div><label>Weight (kg)</label><input type="number" id="bmi-weight" value="65" oninput="calcBMI()"></div>
+        <div><label>Height (cm)</label><input type="number" id="bmi-height" value="170" oninput="calcBMI()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Your BMI</div>
+        <div class="val" id="bmi-val">—</div>
+        <div class="sub" id="bmi-cat" style="color:var(--gold);margin-top:6px;font-weight:600;"></div>
+      </div>
+      <p class="info-note">Underweight &lt;18.5 · Normal 18.5–24.9 · Overweight 25–29.9 · Obese 30+</p>
+    </div>
+  </section>
+
+  <section id="calorie">
+    <div class="sec-label"><div class="stamp">09</div><h2>Calorie Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Daily Calorie Needs (TDEE)</h4>
+      <div class="row2">
+        <div><label>Age</label><input type="number" id="cal-age" value="28" oninput="calcCalorie()"></div>
+        <div><label>Gender</label>
+          <select id="cal-gender" class="calc-select" onchange="calcCalorie()">
+            <option value="male">Male</option><option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div><label>Weight (kg)</label><input type="number" id="cal-weight" value="65" oninput="calcCalorie()"></div>
+        <div><label>Height (cm)</label><input type="number" id="cal-height" value="170" oninput="calcCalorie()"></div>
+      </div>
+      <label>Activity Level</label>
+      <select id="cal-activity" class="calc-select" onchange="calcCalorie()">
+        <option value="1.2">Sedentary (little exercise)</option>
+        <option value="1.375">Light (1-3 days/week)</option>
+        <option value="1.55" selected>Moderate (3-5 days/week)</option>
+        <option value="1.725">Active (6-7 days/week)</option>
+        <option value="1.9">Very Active (athlete)</option>
+      </select>
+      <div class="result-strip">
+        <div class="label">Daily Calories to Maintain Weight</div>
+        <div class="val" id="cal-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="cal-lose">—</div><div class="l">Lose Weight</div></div>
+          <div><div class="n" id="cal-maintain">—</div><div class="l">Maintain</div></div>
+          <div><div class="n" id="cal-gain">—</div><div class="l">Gain Weight</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bodyfat">
+    <div class="sec-label"><div class="stamp">10</div><h2>Body Fat Calculator</h2></div>
+    <div class="calc-card">
+      <h4>US Navy Method</h4>
+      <label>Gender</label>
+      <select id="bf-gender" class="calc-select" onchange="toggleBFHip(); calcBodyFat()">
+        <option value="male">Male</option><option value="female">Female</option>
+      </select>
+      <div class="row2">
+        <div><label>Height (cm)</label><input type="number" id="bf-height" value="170" oninput="calcBodyFat()"></div>
+        <div><label>Neck (cm)</label><input type="number" id="bf-neck" value="38" oninput="calcBodyFat()"></div>
+      </div>
+      <div class="row2">
+        <div><label>Waist (cm)</label><input type="number" id="bf-waist" value="85" oninput="calcBodyFat()"></div>
+        <div id="bf-hip-wrap" style="display:none;"><label>Hip (cm)</label><input type="number" id="bf-hip" value="95" oninput="calcBodyFat()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Estimated Body Fat</div>
+        <div class="val" id="bf-val">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bmr">
+    <div class="sec-label"><div class="stamp">11</div><h2>BMR Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Basal Metabolic Rate</h4>
+      <div class="row2">
+        <div><label>Age</label><input type="number" id="bmr-age" value="28" oninput="calcBMR()"></div>
+        <div><label>Gender</label>
+          <select id="bmr-gender" class="calc-select" onchange="calcBMR()">
+            <option value="male">Male</option><option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div><label>Weight (kg)</label><input type="number" id="bmr-weight" value="65" oninput="calcBMR()"></div>
+        <div><label>Height (cm)</label><input type="number" id="bmr-height" value="170" oninput="calcBMR()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Basal Metabolic Rate</div>
+        <div class="val" id="bmr-val">—</div>
+        <div class="sub" style="color:#c9cfc2;margin-top:6px;font-size:12px;">Calories your body needs at complete rest</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="idealweight">
+    <div class="sec-label"><div class="stamp">12</div><h2>Ideal Weight Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Devine Formula</h4>
+      <div class="row2">
+        <div><label>Gender</label>
+          <select id="iw-gender" class="calc-select" onchange="calcIdealWeight()">
+            <option value="male">Male</option><option value="female">Female</option>
+          </select>
+        </div>
+        <div><label>Height (cm)</label><input type="number" id="iw-height" value="170" oninput="calcIdealWeight()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Ideal Body Weight</div>
+        <div class="val" id="iw-val">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pregnancy">
+    <div class="sec-label"><div class="stamp">13</div><h2>Pregnancy Due Date</h2></div>
+    <div class="calc-card">
+      <h4>Estimated Due Date</h4>
+      <label>First Day of Last Menstrual Period</label>
+      <input type="date" id="preg-lmp" oninput="calcPregnancy()">
+      <div class="result-strip" id="preg-strip" style="display:none;">
+        <div class="label">Estimated Due Date</div>
+        <div class="val" id="preg-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="preg-week">—</div><div class="l">Current Week</div></div>
+          <div><div class="n" id="preg-trimester">—</div><div class="l">Trimester</div></div>
+          <div><div class="n" id="preg-daysleft">—</div><div class="l">Days Left</div></div>
+        </div>
+      </div>
+      <p class="info-note">Based on a standard 280-day (40 week) pregnancy from LMP. Consult your doctor for a clinical estimate.</p>
+    </div>
+  </section>
+
   <div id="comments-section">
     <div class="sec-label"><h2>Comments</h2></div>
     <div class="content-card">
@@ -400,7 +553,94 @@ function sciEval(){
   }catch(e){ document.getElementById('sci-display').textContent = 'Error'; sciExpr=''; }
 }
 
+function calcBMI(){
+  const w = parseFloat(document.getElementById('bmi-weight').value);
+  const h = parseFloat(document.getElementById('bmi-height').value)/100;
+  if(isNaN(w)||isNaN(h)||h<=0) return;
+  const bmi = w/(h*h);
+  let cat = 'Normal';
+  if(bmi<18.5) cat='Underweight'; else if(bmi>=25&&bmi<30) cat='Overweight'; else if(bmi>=30) cat='Obese';
+  document.getElementById('bmi-val').textContent = bmi.toFixed(1);
+  document.getElementById('bmi-cat').textContent = cat;
+}
+
+function calcCalorie(){
+  const age = parseFloat(document.getElementById('cal-age').value);
+  const gender = document.getElementById('cal-gender').value;
+  const w = parseFloat(document.getElementById('cal-weight').value);
+  const h = parseFloat(document.getElementById('cal-height').value);
+  const activity = parseFloat(document.getElementById('cal-activity').value);
+  if(isNaN(age)||isNaN(w)||isNaN(h)) return;
+  let bmr = gender==='male' ? (10*w + 6.25*h - 5*age + 5) : (10*w + 6.25*h - 5*age - 161);
+  const tdee = bmr*activity;
+  document.getElementById('cal-val').textContent = Math.round(tdee).toLocaleString('en-IN') + ' kcal/day';
+  document.getElementById('cal-lose').textContent = Math.round(tdee-500).toLocaleString('en-IN');
+  document.getElementById('cal-maintain').textContent = Math.round(tdee).toLocaleString('en-IN');
+  document.getElementById('cal-gain').textContent = Math.round(tdee+500).toLocaleString('en-IN');
+}
+
+function toggleBFHip(){
+  const gender = document.getElementById('bf-gender').value;
+  document.getElementById('bf-hip-wrap').style.display = gender==='female' ? 'block' : 'none';
+}
+
+function calcBodyFat(){
+  const gender = document.getElementById('bf-gender').value;
+  const height = parseFloat(document.getElementById('bf-height').value);
+  const neck = parseFloat(document.getElementById('bf-neck').value);
+  const waist = parseFloat(document.getElementById('bf-waist').value);
+  if(isNaN(height)||isNaN(neck)||isNaN(waist)) return;
+  let bf;
+  if(gender==='male'){
+    bf = 495/(1.0324-0.19077*Math.log10(waist-neck)+0.15456*Math.log10(height))-450;
+  }else{
+    const hip = parseFloat(document.getElementById('bf-hip').value);
+    if(isNaN(hip)) return;
+    bf = 495/(1.29579-0.35004*Math.log10(waist+hip-neck)+0.22100*Math.log10(height))-450;
+  }
+  document.getElementById('bf-val').textContent = bf.toFixed(1) + '%';
+}
+
+function calcBMR(){
+  const age = parseFloat(document.getElementById('bmr-age').value);
+  const gender = document.getElementById('bmr-gender').value;
+  const w = parseFloat(document.getElementById('bmr-weight').value);
+  const h = parseFloat(document.getElementById('bmr-height').value);
+  if(isNaN(age)||isNaN(w)||isNaN(h)) return;
+  const bmr = gender==='male' ? (10*w + 6.25*h - 5*age + 5) : (10*w + 6.25*h - 5*age - 161);
+  document.getElementById('bmr-val').textContent = Math.round(bmr).toLocaleString('en-IN') + ' kcal/day';
+}
+
+function calcIdealWeight(){
+  const gender = document.getElementById('iw-gender').value;
+  const h = parseFloat(document.getElementById('iw-height').value);
+  if(isNaN(h)) return;
+  const inches = h/2.54;
+  const over5ft = Math.max(0, inches-60);
+  const iw = gender==='male' ? (50 + 2.3*over5ft) : (45.5 + 2.3*over5ft);
+  document.getElementById('iw-val').textContent = iw.toFixed(1) + ' kg';
+}
+
+function calcPregnancy(){
+  const val = document.getElementById('preg-lmp').value;
+  if(!val) return;
+  const lmp = new Date(val);
+  const due = new Date(lmp.getTime() + 280*24*60*60*1000);
+  const now = new Date();
+  const daysSince = Math.floor((now-lmp)/(1000*60*60*24));
+  const week = Math.floor(daysSince/7);
+  const daysLeft = Math.max(0, Math.ceil((due-now)/(1000*60*60*24)));
+  let trimester = '1st';
+  if(week>=27) trimester='3rd'; else if(week>=13) trimester='2nd';
+  document.getElementById('preg-strip').style.display = 'block';
+  document.getElementById('preg-val').textContent = due.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('preg-week').textContent = 'Week ' + Math.max(0,week);
+  document.getElementById('preg-trimester').textContent = trimester;
+  document.getElementById('preg-daysleft').textContent = daysLeft;
+}
+
 calcEMI(); calcSIP(); calcBuilding(); calcPercent(); calcBudget();
+calcBMI(); calcCalorie(); calcBodyFat(); calcBMR(); calcIdealWeight();
 </script>
 </body>
 </html>

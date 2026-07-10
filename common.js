@@ -47,4 +47,14 @@ function onLangChange(){
 
 document.addEventListener('DOMContentLoaded', function(){
   applyLanguage('en');
+
+  document.querySelectorAll('.calc-card, .content-card, .toc').forEach(el=>{
+    el.classList.add('glossy','fade-up');
+  });
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('in-view'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el=> observer.observe(el));
 });

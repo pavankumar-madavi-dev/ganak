@@ -21,16 +21,17 @@
   .result-strip{margin-top:16px;padding:14px 16px;background:var(--ink);color:var(--paper);border-radius:3px;font-size:13px;}
   .result-strip .label{color:#b7bdae;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
   .result-strip .val{font-family:'IBM Plex Mono';font-size:22px;color:var(--gold);font-weight:600;margin-top:2px;}
-  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;position:relative;z-index:1;}
-  .result-grid div{background:var(--paper2);border-radius:3px;padding:10px;text-align:center;min-width:0;overflow:hidden;}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px;}
+  .result-grid div{background:var(--paper2);border-radius:6px;padding:10px 6px;text-align:center;min-width:0;}
+  .result-grid .n{font-family:'IBM Plex Mono';font-weight:600;font-size:clamp(11px,3.2vw,14px);color:var(--teal-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .result-grid .l{font-size:9.5px;color:var(--ink-soft);margin-top:3px;}
   @media(min-width:760px){
     main{max-width:900px;}
     .toc-grid{grid-template-columns:1fr 1fr 1fr 1fr;}
     .toc-cat:nth-child(2n){border-right:1px solid var(--line);}
     .toc-cat:nth-child(4n){border-right:none;}
+    .result-grid .n{font-size:15px;}
   }
-  .result-grid .n{font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:var(--teal-dark);}
-  .result-grid .l{font-size:10px;color:var(--ink-soft);margin-top:3px;}
   .keypad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px;}
   .keypad button{padding:12px 0;background:var(--paper2);border:1px solid var(--line);border-radius:3px;font-family:'IBM Plex Mono';font-size:14px;color:var(--ink);cursor:pointer;}
   .keypad button.op{background:var(--teal);color:#fff;border-color:var(--teal);}
@@ -72,11 +73,11 @@
   </div>
   <nav class="main-nav">
     <div class="inner">
-      <a href="index.html" class="active" data-i18n="nav_home">Home</a>
-      <a href="about.html" data-i18n="nav_about">About Us</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
-      <a href="terms.html" data-i18n="nav_terms">Terms</a>
-      <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+      <a href="index.html" class="active" ><span class="ic">🏠</span><span data-i18n="nav_home">Home</span></a>
+      <a href="about.html" ><span class="ic">ℹ️</span><span data-i18n="nav_about">About Us</span></a>
+      <a href="contact.html" ><span class="ic">✉️</span><span data-i18n="nav_contact">Contact Us</span></a>
+      <a href="terms.html" ><span class="ic">📜</span><span data-i18n="nav_terms">Terms</span></a>
+      <a href="privacy.html" ><span class="ic">🔒</span><span data-i18n="nav_privacy">Privacy Policy</span></a>
     </div>
   </nav>
 </header>
@@ -92,37 +93,37 @@
     <div class="toc-grid">
       <div class="toc-cat">
         <h3>Financial</h3>
-        <a href="#emi">Loan / EMI Calculator</a>
-        <a href="#sip">SIP Calculator</a>
-        <a href="#building">Building Cost Calculator</a>
+        <a href="#emi">💰 Loan / EMI Calculator</a>
+        <a href="#sip">📈 SIP Calculator</a>
+        <a href="#building">🏗️ Building Cost Calculator</a>
       </div>
       <div class="toc-cat">
         <h3>Personal</h3>
-        <a href="#age">Age Calculator</a>
+        <a href="#age">🎂 Age Calculator</a>
         <a href="#budget">Budget Planner</a>
       </div>
       <div class="toc-cat">
         <h3>Mathematics</h3>
-        <a href="#percent">Percentage Calculator</a>
+        <a href="#percent">➗ Percentage Calculator</a>
       </div>
       <div class="toc-cat">
         <h3>Scientific</h3>
-        <a href="#sci">Scientific Calculator</a>
+        <a href="#sci">🧮 Scientific Calculator</a>
       </div>
       <div class="toc-cat">
         <h3>Health &amp; Fitness</h3>
-        <a href="#bmi">BMI Calculator</a>
-        <a href="#calorie">Calorie Calculator</a>
-        <a href="#bodyfat">Body Fat Calculator</a>
-        <a href="#bmr">BMR Calculator</a>
-        <a href="#idealweight">Ideal Weight Calculator</a>
-        <a href="#pregnancy">Pregnancy Due Date</a>
+        <a href="#bmi">⚖️ BMI Calculator</a>
+        <a href="#calorie">🔥 Calorie Calculator</a>
+        <a href="#bodyfat">📏 Body Fat Calculator</a>
+        <a href="#bmr">🔋 BMR Calculator</a>
+        <a href="#idealweight">🧍 Ideal Weight Calculator</a>
+        <a href="#pregnancy">🤰 Pregnancy Due Date</a>
       </div>
     </div>
   </div>
 
   <section id="emi">
-    <div class="sec-label"><div class="stamp">01</div><h2>Loan / EMI Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">01</div><h2>💰 Loan / EMI Calculator</h2></div>
     <div class="calc-card">
       <h4>Monthly EMI Estimator</h4>
       <label>Loan Amount (₹)</label>
@@ -144,7 +145,7 @@
   </section>
 
   <section id="sip">
-    <div class="sec-label"><div class="stamp">02</div><h2>SIP Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">02</div><h2>📈 SIP Calculator</h2></div>
     <div class="calc-card">
       <h4>Systematic Investment Plan</h4>
       <label>Monthly Investment (₹)</label>
@@ -166,7 +167,7 @@
   </section>
 
   <section id="building">
-    <div class="sec-label"><div class="stamp">03</div><h2>Building Cost Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">03</div><h2>🏗️ Building Cost Calculator</h2></div>
     <div class="calc-card">
       <h4>Construction Cost Estimator</h4>
       <label>Built-up Area (sq. ft.)</label>
@@ -180,10 +181,33 @@
       <div class="result-grid" id="bld-breakdown"></div>
       <p class="info-note">Rough material-labour split shown above. Actual rates vary by city, design and material grade.</p>
     </div>
+
+    <div class="calc-card">
+      <h4>🧱 Detailed Material Cost Estimator</h4>
+      <p class="info-note" style="margin-top:0;margin-bottom:10px;">Based on standard consumption per sq.ft. for RCC framed structure. Edit rates to match your local market.</p>
+      <div class="row2">
+        <div><label>Cement Rate (₹/bag, 50kg)</label><input type="number" id="mat-cement-rate" value="380" oninput="calcMaterial()"></div>
+        <div><label>Steel/Sariya Rate (₹/kg)</label><input type="number" id="mat-steel-rate" value="65" oninput="calcMaterial()"></div>
+      </div>
+      <div class="row2">
+        <div><label>Sand Rate (₹/cft)</label><input type="number" id="mat-sand-rate" value="55" oninput="calcMaterial()"></div>
+        <div><label>Aggregate/Gitti Rate (₹/cft)</label><input type="number" id="mat-agg-rate" value="50" oninput="calcMaterial()"></div>
+      </div>
+      <div class="row2">
+        <div><label>Bricks Rate (₹/1000 nos)</label><input type="number" id="mat-brick-rate" value="6000" oninput="calcMaterial()"></div>
+        <div><label>Labour Rate (₹/sq.ft.)</label><input type="number" id="mat-labour-rate" value="200" oninput="calcMaterial()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Detailed Estimated Cost</div>
+        <div class="val" id="mat-total">—</div>
+      </div>
+      <div class="result-grid" id="mat-breakdown" style="grid-template-columns:1fr 1fr 1fr;margin-top:12px;"></div>
+      <p class="info-note">Standard usage: ~0.4 bags cement, ~4 kg steel, ~1.2 cft sand, ~1.5 cft aggregate, ~8 bricks per sq.ft. These are thumb-rule averages — actual quantities depend on structural design.</p>
+    </div>
   </section>
 
   <section id="age">
-    <div class="sec-label"><div class="stamp">04</div><h2>Age Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">04</div><h2>🎂 Age Calculator</h2></div>
     <div class="calc-card">
       <h4>Exact Age From Date of Birth</h4>
       <label>Date of Birth</label>
@@ -201,7 +225,7 @@
   </section>
 
   <section id="budget">
-    <div class="sec-label"><div class="stamp">05</div><h2>Monthly Budget Planner</h2></div>
+    <div class="sec-label"><div class="stamp">05</div><h2>💵 Monthly Budget Planner</h2></div>
     <div class="calc-card">
       <h4>Income, Expenses & Savings</h4>
       <label>Monthly Income (₹)</label>
@@ -222,7 +246,7 @@
   </section>
 
   <section id="percent">
-    <div class="sec-label"><div class="stamp">06</div><h2>Percentage Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">06</div><h2>➗ Percentage Calculator</h2></div>
     <div class="calc-card">
       <h4>What is X% of Y?</h4>
       <div class="row2">
@@ -237,7 +261,7 @@
   </section>
 
   <section id="sci">
-    <div class="sec-label"><div class="stamp">07</div><h2>Scientific Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">07</div><h2>🧮 Scientific Calculator</h2></div>
     <div class="calc-card">
       <div class="sci-display" id="sci-display">0</div>
       <div class="keypad">
@@ -272,7 +296,7 @@
   </section>
 
   <section id="bmi">
-    <div class="sec-label"><div class="stamp">08</div><h2>BMI Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">08</div><h2>⚖️ BMI Calculator</h2></div>
     <div class="calc-card">
       <h4>Body Mass Index</h4>
       <div class="row2">
@@ -289,7 +313,7 @@
   </section>
 
   <section id="calorie">
-    <div class="sec-label"><div class="stamp">09</div><h2>Calorie Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">09</div><h2>🔥 Calorie Calculator</h2></div>
     <div class="calc-card">
       <h4>Daily Calorie Needs (TDEE)</h4>
       <div class="row2">
@@ -325,7 +349,7 @@
   </section>
 
   <section id="bodyfat">
-    <div class="sec-label"><div class="stamp">10</div><h2>Body Fat Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">10</div><h2>📏 Body Fat Calculator</h2></div>
     <div class="calc-card">
       <h4>US Navy Method</h4>
       <label>Gender</label>
@@ -348,7 +372,7 @@
   </section>
 
   <section id="bmr">
-    <div class="sec-label"><div class="stamp">11</div><h2>BMR Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">11</div><h2>🔋 BMR Calculator</h2></div>
     <div class="calc-card">
       <h4>Basal Metabolic Rate</h4>
       <div class="row2">
@@ -372,7 +396,7 @@
   </section>
 
   <section id="idealweight">
-    <div class="sec-label"><div class="stamp">12</div><h2>Ideal Weight Calculator</h2></div>
+    <div class="sec-label"><div class="stamp">12</div><h2>🧍 Ideal Weight Calculator</h2></div>
     <div class="calc-card">
       <h4>Devine Formula</h4>
       <div class="row2">
@@ -391,7 +415,7 @@
   </section>
 
   <section id="pregnancy">
-    <div class="sec-label"><div class="stamp">13</div><h2>Pregnancy Due Date</h2></div>
+    <div class="sec-label"><div class="stamp">13</div><h2>🤰 Pregnancy Due Date</h2></div>
     <div class="calc-card">
       <h4>Estimated Due Date</h4>
       <label>First Day of Last Menstrual Period</label>
@@ -437,14 +461,14 @@
       <div class="footer-col">
         <h4 data-i18n="footer_tools">Tools</h4>
         <a href="#emi">EMI Calculator</a>
-        <a href="#sip">SIP Calculator</a>
-        <a href="#age">Age Calculator</a>
+        <a href="#sip">📈 SIP Calculator</a>
+        <a href="#age">🎂 Age Calculator</a>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer_legal">Legal</h4>
-        <a href="terms.html" data-i18n="nav_terms">Terms</a>
-        <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
-        <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+        <a href="terms.html" ><span class="ic">📜</span><span data-i18n="nav_terms">Terms</span></a>
+        <a href="privacy.html" ><span class="ic">🔒</span><span data-i18n="nav_privacy">Privacy Policy</span></a>
+        <a href="contact.html" ><span class="ic">✉️</span><span data-i18n="nav_contact">Contact Us</span></a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -653,8 +677,38 @@ function calcPregnancy(){
   document.getElementById('preg-daysleft').textContent = daysLeft;
 }
 
+function calcMaterial(){
+  const area = parseFloat(document.getElementById('bld-area').value);
+  const cementRate = parseFloat(document.getElementById('mat-cement-rate').value);
+  const steelRate = parseFloat(document.getElementById('mat-steel-rate').value);
+  const sandRate = parseFloat(document.getElementById('mat-sand-rate').value);
+  const aggRate = parseFloat(document.getElementById('mat-agg-rate').value);
+  const brickRate = parseFloat(document.getElementById('mat-brick-rate').value);
+  const labourRate = parseFloat(document.getElementById('mat-labour-rate').value);
+  if(isNaN(area)) return;
+
+  const cementQty = area*0.4, steelQty = area*4, sandQty = area*1.2, aggQty = area*1.5, brickQty = area*8;
+  const cementCost = cementQty*(cementRate||0);
+  const steelCost = steelQty*(steelRate||0);
+  const sandCost = sandQty*(sandRate||0);
+  const aggCost = aggQty*(aggRate||0);
+  const brickCost = brickQty*((brickRate||0)/1000);
+  const labourCost = area*(labourRate||0);
+  const total = cementCost+steelCost+sandCost+aggCost+brickCost+labourCost;
+
+  document.getElementById('mat-total').textContent = fmtINR(total);
+  document.getElementById('mat-breakdown').innerHTML = `
+    <div><div class="n">${fmtINR(cementCost)}</div><div class="l">Cement (${cementQty.toFixed(0)} bags)</div></div>
+    <div><div class="n">${fmtINR(steelCost)}</div><div class="l">Steel (${steelQty.toFixed(0)} kg)</div></div>
+    <div><div class="n">${fmtINR(sandCost)}</div><div class="l">Sand (${sandQty.toFixed(0)} cft)</div></div>
+    <div><div class="n">${fmtINR(aggCost)}</div><div class="l">Aggregate (${aggQty.toFixed(0)} cft)</div></div>
+    <div><div class="n">${fmtINR(brickCost)}</div><div class="l">Bricks (${brickQty.toFixed(0)} nos)</div></div>
+    <div><div class="n">${fmtINR(labourCost)}</div><div class="l">Labour</div></div>`;
+}
+document.getElementById('bld-area').addEventListener('input', calcMaterial);
+
 calcEMI(); calcSIP(); calcBuilding(); calcPercent(); calcBudget();
-calcBMI(); calcCalorie(); calcBodyFat(); calcBMR(); calcIdealWeight();
+calcBMI(); calcCalorie(); calcBodyFat(); calcBMR(); calcIdealWeight(); calcMaterial();
 </script>
 </body>
 </html>

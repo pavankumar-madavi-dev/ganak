@@ -1,301 +1,406 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>niDar Crypto Toolkit — फ्री कैलकुलेटर और टूल्स</title>
-<meta name="description" content="क्रिप्टो ट्रेडर्स के लिए फ्री टूल्स — Profit/Loss Calculator, Position Size, DCA Calculator, Live Converter — niDar Marketing And Services">
+<title>Ganak — Free Online Calculators for Finance, Age, Building Cost & Math</title>
+<meta name="description" content="Free online calculators: EMI calculator, SIP calculator, building construction cost calculator, age calculator, percentage calculator, scientific calculator and monthly budget planner. Fast, accurate, no sign-up.">
+<meta name="keywords" content="calculator, online calculator, EMI calculator, SIP calculator, age calculator, building construction cost calculator, scientific calculator online, percentage calculator, monthly budget planner, free calculator website">
+<link rel="stylesheet" href="style.css">
 <style>
-  :root{
-    --bg:#0a0a0c;
-    --panel:#141416;
-    --panel-border:rgba(212,175,55,0.18);
-    --gold:#d4af37;
-    --gold-bright:#f4d35e;
-    --text:#eae6da;
-    --text-dim:#8a8578;
-    --green:#3ecf8e;
-    --red:#e85d5d;
-    --radius:14px;
+  .calc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+  .calc-card h4{font-size:14px;color:var(--teal-dark);margin-bottom:14px;font-weight:700;}
+  label{font-size:12px;color:var(--ink-soft);display:block;margin-bottom:5px;margin-top:12px;font-weight:600;}
+  label:first-of-type{margin-top:0;}
+  input[type=number],input[type=date],input[type=text]{
+    width:100%;padding:10px 12px;font-size:15px;background:var(--paper2);
+    border:1px solid var(--line);border-radius:3px;color:var(--ink);font-family:'IBM Plex Mono';
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-    line-height:1.5;
-    min-height:100vh;
-  }
-  body::before{
-    content:"";
-    position:fixed;inset:0;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(212,175,55,0.08), transparent 40%),
-      radial-gradient(circle at 85% 90%, rgba(212,175,55,0.05), transparent 40%);
-    pointer-events:none;z-index:0;
-  }
-  header{
-    text-align:center;
-    padding:36px 20px 24px;
-    position:relative;z-index:1;
-  }
-  .brand-eyebrow{
-    font-size:12px;letter-spacing:3px;text-transform:uppercase;
-    color:var(--gold);opacity:0.8;margin-bottom:8px;
-  }
-  h1{
-    font-size:clamp(24px,6vw,36px);
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold) 60%,#a9812c);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    font-weight:700;
-  }
-  .subtitle{color:var(--text-dim);margin-top:8px;font-size:14px;}
-  main{max-width:520px;margin:0 auto;padding:0 16px 60px;position:relative;z-index:1;}
-
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-    background-color:var(--panel);
-    border:1px solid var(--panel-border);
-    border-radius:var(--radius);
-    padding:20px;
-    margin-bottom:18px;
-    backdrop-filter:blur(6px);
-  }
-  .card h2{
-    font-size:16px;color:var(--gold-bright);
-    display:flex;align-items:center;gap:8px;margin-bottom:14px;
-  }
-  .card h2 .num{
-    font-size:11px;color:var(--bg);background:var(--gold);
-    width:20px;height:20px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;font-weight:700;
-  }
-  label{font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;margin-top:10px;}
-  input, select{
-    width:100%;padding:10px 12px;
-    background:#1c1c1f;border:1px solid rgba(255,255,255,0.08);
-    border-radius:8px;color:var(--text);font-size:15px;
-  }
-  input:focus, select:focus{outline:none;border-color:var(--gold);}
-  .result{
-    margin-top:14px;padding:12px 14px;
-    background:rgba(212,175,55,0.07);
-    border:1px solid var(--panel-border);
-    border-radius:10px;font-size:14px;
-  }
-  .result .big{font-size:20px;font-weight:700;margin-top:2px;}
-  .pos{color:var(--green);}
-  .neg{color:var(--red);}
-
-  /* referral cards */
-  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .ref-card{
-    background:#1c1c1f;border:1px solid var(--panel-border);
-    border-radius:10px;padding:12px;text-align:center;
-    text-decoration:none;color:var(--text);
-    transition:transform .15s, border-color .15s;
-  }
-  .ref-card:active{transform:scale(0.97);}
-  .ref-card .name{font-weight:700;color:var(--gold-bright);font-size:14px;}
-  .ref-card .tag{font-size:11px;color:var(--text-dim);margin-top:3px;}
-
-  footer{
-    text-align:center;padding:20px;color:var(--text-dim);font-size:12px;
-    border-top:1px solid var(--panel-border);position:relative;z-index:1;
-  }
-  footer a{color:var(--gold);text-decoration:none;}
-  .cta{
-    display:block;text-align:center;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    color:#111;font-weight:700;padding:12px;border-radius:10px;text-decoration:none;
-    margin-top:6px;font-size:14px;
-  }
+  input:focus{outline:none;border-color:var(--teal);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .result-strip{margin-top:16px;padding:14px 16px;background:var(--ink);color:var(--paper);border-radius:3px;font-size:13px;}
+  .result-strip .label{color:#b7bdae;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+  .result-strip .val{font-family:'IBM Plex Mono';font-size:22px;color:var(--gold);font-weight:600;margin-top:2px;}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;}
+  .result-grid div{background:var(--paper2);border-radius:3px;padding:10px;text-align:center;}
+  .result-grid .n{font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:var(--teal-dark);}
+  .result-grid .l{font-size:10px;color:var(--ink-soft);margin-top:3px;}
+  .keypad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px;}
+  .keypad button{padding:12px 0;background:var(--paper2);border:1px solid var(--line);border-radius:3px;font-family:'IBM Plex Mono';font-size:14px;color:var(--ink);cursor:pointer;}
+  .keypad button.op{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .keypad button.eq{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .sci-display{width:100%;padding:14px;font-size:20px;text-align:right;background:var(--ink);color:var(--gold);border-radius:3px;font-family:'IBM Plex Mono';margin-bottom:10px;min-height:52px;word-break:break-all;}
+  .expense-row{display:flex;gap:8px;margin-top:8px;align-items:center;}
+  .expense-row input{flex:1;}
+  .expense-row button{background:#c0392b;color:#fff;border:none;width:32px;height:32px;border-radius:3px;cursor:pointer;flex-shrink:0;}
+  .add-row-btn{margin-top:10px;background:none;border:1px dashed var(--ink-soft);color:var(--ink-soft);padding:8px;width:100%;border-radius:3px;font-size:12px;cursor:pointer;}
+  .info-note{font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.6;}
+  .sec-label{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:44px;}
+  .sec-label .stamp{width:30px;height:30px;border:1.5px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal);font-family:'IBM Plex Mono';font-weight:600;font-size:12px;flex-shrink:0;}
+  .sec-label h2{font-size:19px;color:var(--ink);}
+  .toc{background:var(--card);border:1px solid var(--line);margin-top:16px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(32,38,31,0.10);overflow:hidden;}
+  .toc-head{padding:14px 18px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);display:flex;justify-content:space-between;}
+  .toc-grid{display:grid;grid-template-columns:1fr 1fr;}
+  .toc-cat{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .toc-cat:nth-child(2n){border-right:none;}
+  .toc-cat h3{font-size:14px;color:var(--teal-dark);margin-bottom:8px;}
+  .toc-cat a{display:block;font-size:12.5px;color:var(--ink);text-decoration:none;padding:3px 0;}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand-eyebrow">niDar Marketing And Services</div>
-  <h1>Crypto Toolkit</h1>
-  <div class="subtitle">फ्री कैलकुलेटर — निवेश से पहले हिसाब लगाओ</div>
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="brand-row">
+      <div class="brand-mark">ग</div>
+      <h1>Ganak</h1>
+    </a>
+    <div class="header-controls">
+      <select id="lang-select" onchange="onLangChange()">
+        <option value="en">EN</option>
+        <option value="hi">हिं</option>
+        <option value="mr">मरा</option>
+      </select>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <div class="inner">
+      <a href="index.html" class="active" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+      <a href="terms.html" data-i18n="nav_terms">Terms</a>
+      <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+    </div>
+  </nav>
 </header>
 
 <main>
-
-  <!-- 1. Profit/Loss Calculator -->
-  <div class="card">
-    <h2><span class="num">1</span> Profit / Loss Calculator</h2>
-    <label>Buy Price (₹)</label>
-    <input type="number" id="pl-buy" placeholder="जैसे 5800000" oninput="calcPL()">
-    <label>Sell Price (₹)</label>
-    <input type="number" id="pl-sell" placeholder="जैसे 6100000" oninput="calcPL()">
-    <label>Quantity</label>
-    <input type="number" id="pl-qty" placeholder="जैसे 0.01" value="1" oninput="calcPL()">
-    <div class="result" id="pl-result">प्राइस डालो, रिज़ल्ट यहाँ दिखेगा</div>
+  <div class="page-hero">
+    <h2>Every calculation you need, free.</h2>
+    <p>Finance, construction, age and math calculators — fast, accurate, and built for anyone, anywhere in the world.</p>
   </div>
 
-  <!-- 2. Position Size Calculator -->
-  <div class="card">
-    <h2><span class="num">2</span> Position Size Calculator</h2>
-    <label>कुल Capital (₹)</label>
-    <input type="number" id="ps-capital" placeholder="जैसे 50000" oninput="calcPS()">
-    <label>Risk प्रति ट्रेड (%)</label>
-    <input type="number" id="ps-risk" placeholder="जैसे 2" value="2" oninput="calcPS()">
-    <label>Entry Price (₹)</label>
-    <input type="number" id="ps-entry" placeholder="जैसे 5800000" oninput="calcPS()">
-    <label>Stop Loss Price (₹)</label>
-    <input type="number" id="ps-sl" placeholder="जैसे 5700000" oninput="calcPS()">
-    <div class="result" id="ps-result">डिटेल्स डालो, position size दिखेगा</div>
-  </div>
-
-  <!-- 3. DCA / SIP Calculator -->
-  <div class="card">
-    <h2><span class="num">3</span> DCA (SIP) Calculator</h2>
-    <label>हर महीने Investment (₹)</label>
-    <input type="number" id="dca-amt" placeholder="जैसे 2000" oninput="calcDCA()">
-    <label>अनुमानित सालाना Return (%)</label>
-    <input type="number" id="dca-rate" placeholder="जैसे 15" value="15" oninput="calcDCA()">
-    <label>कितने साल</label>
-    <input type="number" id="dca-years" placeholder="जैसे 5" value="5" oninput="calcDCA()">
-    <div class="result" id="dca-result">डिटेल्स डालो, future value दिखेगा</div>
-  </div>
-
-  <!-- 4. Live Converter -->
-  <div class="card">
-    <h2><span class="num">4</span> Live Crypto Converter</h2>
-    <label>Amount</label>
-    <input type="number" id="conv-amt" placeholder="जैसे 1000" value="1000" oninput="calcConv()">
-    <label>From</label>
-    <select id="conv-from" onchange="calcConv()">
-      <option value="inr">INR (₹)</option>
-      <option value="bitcoin">BTC</option>
-      <option value="ethereum">ETH</option>
-      <option value="tether">USDT</option>
-    </select>
-    <label>To</label>
-    <select id="conv-to" onchange="calcConv()">
-      <option value="bitcoin">BTC</option>
-      <option value="inr">INR (₹)</option>
-      <option value="ethereum">ETH</option>
-      <option value="tether">USDT</option>
-    </select>
-    <div class="result" id="conv-result">लोड हो रहा है live rate...</div>
-  </div>
-
-  <!-- 5. Exchange Referral -->
-  <div class="card">
-    <h2><span class="num">5</span> Exchange पर Sign Up करो</h2>
-    <div class="subtitle" style="margin-bottom:12px;">इन referral links से sign up करने पर bonus/discount मिलता है</div>
-    <div class="ref-grid">
-      <a class="ref-card" href="https://accounts.binance.com/register?ref=GRO_28502_2UOCJ" target="_blank" rel="noopener">
-        <div class="name">Binance</div>
-        <div class="tag">World's #1 Exchange</div>
-      </a>
-      <a class="ref-card" href="https://www.delta.exchange/?code=DBQGEA" target="_blank" rel="noopener">
-        <div class="name">Delta India</div>
-        <div class="tag">Options Trading</div>
-      </a>
-      <a class="ref-card" href="https://coinswitch.co/in/x/MuyP" target="_blank" rel="noopener">
-        <div class="name">CoinSwitch</div>
-        <div class="tag">Easy for Beginners</div>
-      </a>
-      <a class="ref-card" href="#" target="_blank" rel="noopener">
-        <div class="name">CoinDCX</div>
-        <div class="tag">Low Fees</div>
-      </a>
+  <div class="toc">
+    <div class="toc-head"><span>Index</span><span>7 tools</span></div>
+    <div class="toc-grid">
+      <div class="toc-cat">
+        <h3>Financial</h3>
+        <a href="#emi">Loan / EMI Calculator</a>
+        <a href="#sip">SIP Calculator</a>
+        <a href="#building">Building Cost Calculator</a>
+      </div>
+      <div class="toc-cat">
+        <h3>Personal</h3>
+        <a href="#age">Age Calculator</a>
+        <a href="#budget">Budget Planner</a>
+      </div>
+      <div class="toc-cat">
+        <h3>Mathematics</h3>
+        <a href="#percent">Percentage Calculator</a>
+      </div>
+      <div class="toc-cat">
+        <h3>Scientific</h3>
+        <a href="#sci">Scientific Calculator</a>
+      </div>
     </div>
-    <a class="cta" href="https://t.me/GlobalTraderPavan" target="_blank" rel="noopener">📩 Free Signals — Telegram Join करो</a>
   </div>
 
+  <section id="emi">
+    <div class="sec-label"><div class="stamp">01</div><h2>Loan / EMI Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Monthly EMI Estimator</h4>
+      <label>Loan Amount (₹)</label>
+      <input type="number" id="emi-amt" value="500000" oninput="calcEMI()">
+      <div class="row2">
+        <div><label>Interest Rate (% p.a.)</label><input type="number" id="emi-rate" value="9" step="0.1" oninput="calcEMI()"></div>
+        <div><label>Tenure (years)</label><input type="number" id="emi-years" value="5" oninput="calcEMI()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Monthly EMI</div>
+        <div class="val" id="emi-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="emi-total">—</div><div class="l">Total Payment</div></div>
+          <div><div class="n" id="emi-interest">—</div><div class="l">Total Interest</div></div>
+          <div><div class="n" id="emi-principal">—</div><div class="l">Principal</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sip">
+    <div class="sec-label"><div class="stamp">02</div><h2>SIP Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Systematic Investment Plan</h4>
+      <label>Monthly Investment (₹)</label>
+      <input type="number" id="sip-amt" value="5000" oninput="calcSIP()">
+      <div class="row2">
+        <div><label>Expected Return (% p.a.)</label><input type="number" id="sip-rate" value="12" step="0.1" oninput="calcSIP()"></div>
+        <div><label>Duration (years)</label><input type="number" id="sip-years" value="10" oninput="calcSIP()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Estimated Maturity Value</div>
+        <div class="val" id="sip-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="sip-invested">—</div><div class="l">Invested</div></div>
+          <div><div class="n" id="sip-gain">—</div><div class="l">Wealth Gained</div></div>
+          <div><div class="n" id="sip-months">—</div><div class="l">Months</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="building">
+    <div class="sec-label"><div class="stamp">03</div><h2>Building Cost Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Construction Cost Estimator</h4>
+      <label>Built-up Area (sq. ft.)</label>
+      <input type="number" id="bld-area" value="1200" oninput="calcBuilding()">
+      <label>Construction Rate (₹ per sq. ft.)</label>
+      <input type="number" id="bld-rate" value="1800" oninput="calcBuilding()">
+      <div class="result-strip">
+        <div class="label">Estimated Total Cost</div>
+        <div class="val" id="bld-val">—</div>
+      </div>
+      <div class="result-grid" id="bld-breakdown"></div>
+      <p class="info-note">Rough material-labour split shown above. Actual rates vary by city, design and material grade.</p>
+    </div>
+  </section>
+
+  <section id="age">
+    <div class="sec-label"><div class="stamp">04</div><h2>Age Calculator</h2></div>
+    <div class="calc-card">
+      <h4>Exact Age From Date of Birth</h4>
+      <label>Date of Birth</label>
+      <input type="date" id="age-dob" oninput="calcAge()">
+      <div class="result-strip" id="age-strip" style="display:none;">
+        <div class="label">Your Age</div>
+        <div class="val" id="age-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="age-days">—</div><div class="l">Total Days</div></div>
+          <div><div class="n" id="age-months">—</div><div class="l">Total Months</div></div>
+          <div><div class="n" id="age-nextbday">—</div><div class="l">Days to Next Bday</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="budget">
+    <div class="sec-label"><div class="stamp">05</div><h2>Monthly Budget Planner</h2></div>
+    <div class="calc-card">
+      <h4>Income, Expenses & Savings</h4>
+      <label>Monthly Income (₹)</label>
+      <input type="number" id="bud-income" value="30000" oninput="calcBudget()">
+      <label style="margin-top:16px;">Expenses</label>
+      <div id="expense-list"></div>
+      <button class="add-row-btn" onclick="addExpenseRow()">+ Add Expense</button>
+      <div class="result-strip">
+        <div class="label">Monthly Savings</div>
+        <div class="val" id="bud-val">—</div>
+        <div class="result-grid">
+          <div><div class="n" id="bud-expense-total">—</div><div class="l">Total Expense</div></div>
+          <div><div class="n" id="bud-save-pct">—</div><div class="l">Savings Rate</div></div>
+          <div><div class="n" id="bud-yearly">—</div><div class="l">Yearly Savings</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="percent">
+    <div class="sec-label"><div class="stamp">06</div><h2>Percentage Calculator</h2></div>
+    <div class="calc-card">
+      <h4>What is X% of Y?</h4>
+      <div class="row2">
+        <div><label>X (%)</label><input type="number" id="pc-x" value="15" oninput="calcPercent()"></div>
+        <div><label>of Y</label><input type="number" id="pc-y" value="2400" oninput="calcPercent()"></div>
+      </div>
+      <div class="result-strip">
+        <div class="label">Result</div>
+        <div class="val" id="pc-val">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sci">
+    <div class="sec-label"><div class="stamp">07</div><h2>Scientific Calculator</h2></div>
+    <div class="calc-card">
+      <div class="sci-display" id="sci-display">0</div>
+      <div class="keypad">
+        <button onclick="sciFn('sin(')">sin</button>
+        <button onclick="sciFn('cos(')">cos</button>
+        <button onclick="sciFn('tan(')">tan</button>
+        <button onclick="sciFn('log(')">log</button>
+        <button onclick="sciFn('sqrt(')">√</button>
+        <button onclick="sciInput('7')">7</button>
+        <button onclick="sciInput('8')">8</button>
+        <button onclick="sciInput('9')">9</button>
+        <button class="op" onclick="sciInput('/')">÷</button>
+        <button onclick="sciClear()">C</button>
+        <button onclick="sciInput('4')">4</button>
+        <button onclick="sciInput('5')">5</button>
+        <button onclick="sciInput('6')">6</button>
+        <button class="op" onclick="sciInput('*')">×</button>
+        <button onclick="sciBack()">⌫</button>
+        <button onclick="sciInput('1')">1</button>
+        <button onclick="sciInput('2')">2</button>
+        <button onclick="sciInput('3')">3</button>
+        <button class="op" onclick="sciInput('-')">−</button>
+        <button onclick="sciFn('^')">xʸ</button>
+        <button onclick="sciInput('0')">0</button>
+        <button onclick="sciInput('.')">.</button>
+        <button onclick="sciInput('(')">(</button>
+        <button class="op" onclick="sciInput('+')">+</button>
+        <button onclick="sciInput(')')">)</button>
+        <button class="eq" onclick="sciEval()" style="grid-column:span 5;">=</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="comments-section">
+    <div class="sec-label"><h2>Comments</h2></div>
+    <div class="content-card">
+      <p>Comments are powered by GitHub Discussions (Giscus) — will appear here once connected.</p>
+    </div>
+  </div>
 </main>
 
-<footer>
-  Built by <a href="#">niDar Marketing And Services</a> · Sadak Arjuni, Gondia<br>
-  यह financial advice नहीं है — अपना research खुद करें
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 data-i18n="footer_tools">Tools</h4>
+        <a href="#emi">EMI Calculator</a>
+        <a href="#sip">SIP Calculator</a>
+        <a href="#age">Age Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_legal">Legal</h4>
+        <a href="terms.html" data-i18n="nav_terms">Terms</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacy Policy</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ganak. All rights reserved.</span>
+      <span class="visitor-badge"><img src="https://hits.sh/pavankumar-madavi-dev.github.io/ganak.svg?label=visits" alt="visitor count"></span>
+    </div>
+  </div>
 </footer>
 
+<script src="common.js"></script>
 <script>
-function fmtINR(n){
-  if(isNaN(n)) return "—";
-  return "₹" + n.toLocaleString('en-IN', {maximumFractionDigits:2});
+function fmtINR(n){ if(isNaN(n)) return "—"; return "₹" + n.toLocaleString('en-IN', {maximumFractionDigits:0}); }
+
+function calcEMI(){
+  const P = parseFloat(document.getElementById('emi-amt').value);
+  const annualRate = parseFloat(document.getElementById('emi-rate').value);
+  const years = parseFloat(document.getElementById('emi-years').value);
+  if(isNaN(P)||isNaN(annualRate)||isNaN(years)||years<=0) return;
+  const r = annualRate/12/100; const n = years*12;
+  const emi = r===0 ? P/n : (P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  const total = emi*n; const interest = total-P;
+  document.getElementById('emi-val').textContent = fmtINR(emi);
+  document.getElementById('emi-total').textContent = fmtINR(total);
+  document.getElementById('emi-interest').textContent = fmtINR(interest);
+  document.getElementById('emi-principal').textContent = fmtINR(P);
 }
 
-function calcPL(){
-  const buy = parseFloat(document.getElementById('pl-buy').value);
-  const sell = parseFloat(document.getElementById('pl-sell').value);
-  const qty = parseFloat(document.getElementById('pl-qty').value) || 1;
-  const el = document.getElementById('pl-result');
-  if(isNaN(buy) || isNaN(sell) || buy<=0){ el.innerHTML = "Buy और Sell price डालो"; return; }
-  const pl = (sell-buy)*qty;
-  const pct = ((sell-buy)/buy*100);
-  const cls = pl>=0 ? 'pos' : 'neg';
-  el.innerHTML = `Net P/L: <div class="big ${cls}">${pl>=0?'+':''}${fmtINR(pl)} (${pct.toFixed(2)}%)</div>`;
-}
-
-function calcPS(){
-  const cap = parseFloat(document.getElementById('ps-capital').value);
-  const riskPct = parseFloat(document.getElementById('ps-risk').value);
-  const entry = parseFloat(document.getElementById('ps-entry').value);
-  const sl = parseFloat(document.getElementById('ps-sl').value);
-  const el = document.getElementById('ps-result');
-  if(isNaN(cap)||isNaN(riskPct)||isNaN(entry)||isNaN(sl)||entry===sl){ el.innerHTML = "सभी फ़ील्ड भरो"; return; }
-  const riskAmt = cap*(riskPct/100);
-  const perUnitRisk = Math.abs(entry-sl);
-  const qty = riskAmt/perUnitRisk;
-  const positionValue = qty*entry;
-  el.innerHTML = `Risk Amount: ${fmtINR(riskAmt)}<br>Quantity: <div class="big">${qty.toFixed(6)}</div>Position Value: ${fmtINR(positionValue)}`;
-}
-
-function calcDCA(){
-  const amt = parseFloat(document.getElementById('dca-amt').value);
-  const rate = parseFloat(document.getElementById('dca-rate').value);
-  const years = parseFloat(document.getElementById('dca-years').value);
-  const el = document.getElementById('dca-result');
-  if(isNaN(amt)||isNaN(rate)||isNaN(years)){ el.innerHTML = "सभी फ़ील्ड भरो"; return; }
-  const n = years*12;
-  const i = rate/100/12;
+function calcSIP(){
+  const amt = parseFloat(document.getElementById('sip-amt').value);
+  const annualRate = parseFloat(document.getElementById('sip-rate').value);
+  const years = parseFloat(document.getElementById('sip-years').value);
+  if(isNaN(amt)||isNaN(annualRate)||isNaN(years)) return;
+  const i = annualRate/12/100; const n = years*12;
   const fv = amt * ((Math.pow(1+i,n)-1)/i) * (1+i);
   const invested = amt*n;
-  const gain = fv-invested;
-  el.innerHTML = `कुल Investment: ${fmtINR(invested)}<br>Estimated Value: <div class="big pos">${fmtINR(fv)}</div>Gain: ${fmtINR(gain)}`;
+  document.getElementById('sip-val').textContent = fmtINR(fv);
+  document.getElementById('sip-invested').textContent = fmtINR(invested);
+  document.getElementById('sip-gain').textContent = fmtINR(fv-invested);
+  document.getElementById('sip-months').textContent = n;
 }
 
-let priceCache = null;
-async function fetchPrices(){
+function calcBuilding(){
+  const area = parseFloat(document.getElementById('bld-area').value);
+  const rate = parseFloat(document.getElementById('bld-rate').value);
+  if(isNaN(area)||isNaN(rate)) return;
+  const total = area*rate;
+  document.getElementById('bld-val').textContent = fmtINR(total);
+  const material = total*0.55, labour = total*0.30, finishing = total*0.15;
+  document.getElementById('bld-breakdown').innerHTML = `
+    <div><div class="n">${fmtINR(material)}</div><div class="l">Material (55%)</div></div>
+    <div><div class="n">${fmtINR(labour)}</div><div class="l">Labour (30%)</div></div>
+    <div><div class="n">${fmtINR(finishing)}</div><div class="l">Finishing (15%)</div></div>`;
+}
+
+function calcAge(){
+  const val = document.getElementById('age-dob').value;
+  if(!val) return;
+  const dob = new Date(val); const now = new Date();
+  if(dob > now) return;
+  let years = now.getFullYear()-dob.getFullYear();
+  let months = now.getMonth()-dob.getMonth();
+  let days = now.getDate()-dob.getDate();
+  if(days<0){ months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+  if(months<0){ years--; months+=12; }
+  const totalDays = Math.floor((now-dob)/(1000*60*60*24));
+  const totalMonths = years*12+months;
+  let nextBday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+  if(nextBday < now) nextBday.setFullYear(now.getFullYear()+1);
+  const daysToNext = Math.ceil((nextBday-now)/(1000*60*60*24));
+  document.getElementById('age-strip').style.display = 'block';
+  document.getElementById('age-val').textContent = `${years}y ${months}m ${days}d`;
+  document.getElementById('age-days').textContent = totalDays.toLocaleString('en-IN');
+  document.getElementById('age-months').textContent = totalMonths;
+  document.getElementById('age-nextbday').textContent = daysToNext;
+}
+
+let expenseIdCounter = 0;
+function addExpenseRow(name, amount){
+  expenseIdCounter++;
+  const id = 'exp-'+expenseIdCounter;
+  const div = document.createElement('div');
+  div.className = 'expense-row'; div.id = 'row-'+id;
+  div.innerHTML = `<input type="text" placeholder="Category" value="${name||''}" oninput="calcBudget()" id="name-${id}">
+    <input type="number" placeholder="₹ Amount" value="${amount||''}" oninput="calcBudget()" id="amt-${id}" style="max-width:110px;">
+    <button onclick="document.getElementById('row-${id}').remove(); calcBudget();">×</button>`;
+  document.getElementById('expense-list').appendChild(div);
+}
+function calcBudget(){
+  const income = parseFloat(document.getElementById('bud-income').value) || 0;
+  const amtInputs = document.querySelectorAll('#expense-list input[type=number]');
+  let totalExp = 0;
+  amtInputs.forEach(inp=>{ totalExp += parseFloat(inp.value)||0; });
+  const savings = income-totalExp;
+  const pct = income>0 ? (savings/income*100) : 0;
+  document.getElementById('bud-val').textContent = fmtINR(savings);
+  document.getElementById('bud-expense-total').textContent = fmtINR(totalExp);
+  document.getElementById('bud-save-pct').textContent = pct.toFixed(0)+'%';
+  document.getElementById('bud-yearly').textContent = fmtINR(savings*12);
+}
+addExpenseRow('Rent', 8000); addExpenseRow('Groceries', 5000); addExpenseRow('Transport', 2000);
+
+function calcPercent(){
+  const x = parseFloat(document.getElementById('pc-x').value);
+  const y = parseFloat(document.getElementById('pc-y').value);
+  if(isNaN(x)||isNaN(y)) return;
+  document.getElementById('pc-val').textContent = (x/100*y).toLocaleString('en-IN',{maximumFractionDigits:2});
+}
+
+let sciExpr = '';
+function sciInput(v){ sciExpr += v; document.getElementById('sci-display').textContent = sciExpr || '0'; }
+function sciFn(fn){ sciExpr += fn; document.getElementById('sci-display').textContent = sciExpr; }
+function sciClear(){ sciExpr=''; document.getElementById('sci-display').textContent = '0'; }
+function sciBack(){ sciExpr = sciExpr.slice(0,-1); document.getElementById('sci-display').textContent = sciExpr || '0'; }
+function sciEval(){
   try{
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=inr');
-    priceCache = await res.json();
-    calcConv();
-  }catch(e){
-    document.getElementById('conv-result').innerHTML = "Live rate लोड नहीं हो पाया, internet check करो";
-  }
+    let expr = sciExpr.replace(/sin\(/g,'Math.sin(').replace(/cos\(/g,'Math.cos(').replace(/tan\(/g,'Math.tan(').replace(/log\(/g,'Math.log10(').replace(/sqrt\(/g,'Math.sqrt(').replace(/\^/g,'**');
+    const result = Function('"use strict"; return ('+expr+')')();
+    sciExpr = String(result);
+    document.getElementById('sci-display').textContent = sciExpr;
+  }catch(e){ document.getElementById('sci-display').textContent = 'Error'; sciExpr=''; }
 }
 
-function calcConv(){
-  const amt = parseFloat(document.getElementById('conv-amt').value);
-  const from = document.getElementById('conv-from').value;
-  const to = document.getElementById('conv-to').value;
-  const el = document.getElementById('conv-result');
-  if(!priceCache){ el.innerHTML = "Live rate लोड हो रहा है..."; return; }
-  if(isNaN(amt)){ el.innerHTML = "Amount डालो"; return; }
-
-  function toINR(coin, val){
-    if(coin==='inr') return val;
-    return val * priceCache[coin].inr;
-  }
-  function fromINR(coin, val){
-    if(coin==='inr') return val;
-    return val / priceCache[coin].inr;
-  }
-  const inINR = toINR(from, amt);
-  const result = fromINR(to, inINR);
-  const label = to==='inr' ? fmtINR(result) : result.toFixed(8) + ' ' + to.toUpperCase().replace('TETHER','USDT').replace('BITCOIN','BTC').replace('ETHEREUM','ETH');
-  el.innerHTML = `<div class="big">${label}</div>`;
-}
-
-fetchPrices();
-setInterval(fetchPrices, 60000);
-calcPL(); calcPS(); calcDCA();
+calcEMI(); calcSIP(); calcBuilding(); calcPercent(); calcBudget();
 </script>
-
 </body>
 </html>

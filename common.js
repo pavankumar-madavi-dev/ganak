@@ -3,7 +3,12 @@
 function toggleTheme(){
   document.body.classList.toggle('dark');
   const btn = document.getElementById('theme-btn');
-  if(btn) btn.textContent = document.body.classList.contains('dark') ? '☀ Light' : '🌙 Dark';
+  const isDark = document.body.classList.contains('dark');
+  if(btn) btn.textContent = isDark ? '☀ Light' : '🌙 Dark';
+  const giscusFrame = document.querySelector('iframe.giscus-frame');
+  if(giscusFrame){
+    giscusFrame.contentWindow.postMessage({ giscus: { setConfig: { theme: isDark ? 'dark' : 'light' } } }, 'https://giscus.app');
+  }
 }
 
 const translations = {

@@ -57,4 +57,47 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el=> observer.observe(el));
+
+  injectShareButton();
 });
+
+function injectShareButton(){
+  const shareText = "🧮 Ganak — Free EMI, SIP, Age, BMI and 13+ calculators. No sign-up needed!";
+  const shareUrl = "https://pavankumar-madavi-dev.github.io/ganak/";
+
+  const fab = document.createElement('div');
+  fab.className = 'share-fab';
+  fab.innerHTML = '📤';
+  fab.onclick = onShareFabClick;
+
+  const menu = document.createElement('div');
+  menu.className = 'share-menu';
+  menu.id = 'share-menu';
+  menu.innerHTML = `
+    <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}" target="_blank"><span class="ic">🟢</span> WhatsApp</a>
+    <a href="https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}" target="_blank"><span class="ic">🔵</span> Telegram</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank"><span class="ic">🔷</span> Facebook</a>
+    <button onclick="copyShareLink()"><span class="ic">🔗</span> Copy Link</button>
+  `;
+
+  document.body.appendChild(fab);
+  document.body.appendChild(menu);
+}
+
+function onShareFabClick(){
+  const shareText = "🧮 Ganak — Free EMI, SIP, Age, BMI and 13+ calculators. No sign-up needed!";
+  const shareUrl = "https://pavankumar-madavi-dev.github.io/ganak/";
+  if(navigator.share){
+    navigator.share({ title: 'Ganak Calculators', text: shareText, url: shareUrl }).catch(()=>{});
+  }else{
+    document.getElementById('share-menu').classList.toggle('open');
+  }
+}
+
+function copyShareLink(){
+  const shareUrl = "https://pavankumar-madavi-dev.github.io/ganak/";
+  navigator.clipboard.writeText(shareUrl).then(()=>{
+    alert('Link copied!');
+    document.getElementById('share-menu').classList.remove('open');
+  });
+}

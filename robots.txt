@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pavankumar-madavi-dev.github.io/ganak/sitemap.xml
